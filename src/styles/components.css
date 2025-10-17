@@ -1,0 +1,70 @@
+.show-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: var(--bg-secondary, #f9f9f9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.show-card:hover {
+  transform: scale(1.02);
+}
+
+.show-card-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.show-card-content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.show-card-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+.show-card-description {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+.show-card-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.genre-pill,
+.seasons-pill,
+.updated-pill {
+  padding: 0.25rem 0.5rem;
+  background-color: #e1e1e1;
+  border-radius: 999px;
+}
+
+
+.last-updated {
+  font-style: italic;
+}
+
+/* Responsive layout */
+@media (min-width: 640px) {
+  .show-card {
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .show-card {
+    max-width: 340px;
+  }
+}

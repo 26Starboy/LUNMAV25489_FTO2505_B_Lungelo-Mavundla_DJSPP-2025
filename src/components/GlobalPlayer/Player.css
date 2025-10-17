@@ -1,0 +1,65 @@
+.player-container {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: var(--bg-secondary);
+  padding: 10px;
+  box-shadow: var(--shadow);
+  z-index: 1000;
+}
+
+.player-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.episode-info {
+  flex-grow: 1;
+  margin-right: 10px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+button {
+  padding: 5px 10px;
+  margin: 0 5px;
+  cursor: pointer;
+}
+
+.progress-bar {
+  flex-grow: 2;
+  height: 5px;
+  background: var(--border-color);
+  position: relative;
+  cursor: pointer;
+}
+
+.progress {
+  height: 100%;
+  background: var(--text-primary);
+  transition: width 0.1s linear;
+}
+
+.time-display {
+  min-width: 80px;
+  text-align: right;
+}
+
+/* Mobile adjustments */
+@media (max-width: 768px) {
+  .player-container {
+    padding: 5px;
+  }
+  .episode-info {
+    display: none;
+  }
+  button {
+    padding: 3px 6px;
+    font-size: 12px;
+  }
+}

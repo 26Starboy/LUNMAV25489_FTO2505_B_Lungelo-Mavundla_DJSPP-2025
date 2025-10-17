@@ -2,7 +2,7 @@
   max-width: 1280px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+  text-align: left; /* let content flow naturally */
 }
 
 .logo {
@@ -35,6 +35,9 @@
 
 .card {
   padding: 2em;
+  background-color: var(--bg-primary, #fff);
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 
 .read-the-docs {
