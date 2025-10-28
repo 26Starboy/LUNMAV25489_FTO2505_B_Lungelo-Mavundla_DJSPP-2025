@@ -1,30 +1,35 @@
-import { usePodcastStore } from '../store/usePodcastStore'
-import { format } from 'date-fns'
+// src/pages/Favourites.jsx
+import { useFavorites } from '../store/useFavorites'  // Correct path
+import { fetchShows } from '../api/client'
+import { useState, useEffect } from 'react'
+import PodcastCard from '../components/PodcastCard'
 
 export default function Favourites() {
-  const { favourites } = usePodcastStore()
+  const { favorites } = useFavorites()
+  const [shows, setShows] = useState([])
+  const [loading, setLoading] = useState(true)
 
-  const grouped = favourites.reduce((acc, ep) => {
-    const key = ep.showTitle
-    if (!acc[key]) acc[key] = []
-    acc[key].push(ep)
-    return acc
-  }, {})
+  useEffect(() => {
+    if (favorites.length === 0) {
+      setShows([])
+      setLoading(false)
+      return
+    }
+
+    fetchShows().then(allShows => {
+      const favShows = allShows.filter(s => favorites.includes(s.id))
+      setShows(favShows)
+      setLoading(false)
+    })
+  }, [favorites])
+
+  if (loading) return <p>Loading favorites...</p>
+  if (shows.length === 0) return <p>No favorites yet. Click the heart on any show!</p>
 
   return (
-    <div className="favourites-page">
-      <h1>Favourites</h1>
-      {Object.entries(grouped).map(([show, eps]) => (
-        <div key={show} className="show-group">
-          <h2>{show}</h2>
-          {eps.sort((a, b) => a.title.localeCompare(b.title)).map(ep => (
-            <div key={ep.id}>
-              <strong>{ep.title}</strong> (Season {ep.seasonNumber})
-              <br />
-              <small>Added: {format(new Date(ep.addedAt), 'PPp')}</small>
-            </div>
-          ))}
-        </div>
+    <div className="podcast-grid">
+      {shows.map(show => (
+        <PodcastCard key={show.id} podcast={show} />
       ))}
     </div>
   )

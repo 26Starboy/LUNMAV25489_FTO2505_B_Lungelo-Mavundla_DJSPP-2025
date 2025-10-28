@@ -2,18 +2,17 @@
 import { useState } from 'react'
 import { genres } from '../data'
 import EpisodeItem from './EpisodeItem'
-
-const PLACEHOLDER_AUDIO = 'https://podcast-api.netlify.app/placeholder-audio.mp3'
+import { useFavorites } from '../store/useFavorites'
 
 export default function PodcastModal({ podcast, onClose }) {
   const [selectedSeason, setSelectedSeason] = useState(0)
+  const { favorites, toggleFavorite } = useFavorites()
+  const isFavorite = favorites.includes(podcast.id)
 
-  // SAFEGUARD: Ensure data exists
   const seasons = Array.isArray(podcast.seasons) ? podcast.seasons : []
   const season = seasons[selectedSeason] || { title: 'No Season', episodes: [], image: podcast.image }
   const episodes = Array.isArray(season.episodes) ? season.episodes : []
 
-  // GENRES: Map using `data.js`
   const genreTitles = podcast.genres
     ?.map(gId => genres.find(g => g.shows.includes(podcast.id))?.title)
     .filter(Boolean) || []
@@ -23,15 +22,22 @@ export default function PodcastModal({ podcast, onClose }) {
   return (
     <div className="modal-overlay" onClick={onClose}>
       <div className="modal-content" onClick={e => e.stopPropagation()}>
-        {/* Close Buttons */}
         <button className="modal-close" onClick={onClose}>×</button>
         <button className="modal-back" onClick={onClose}>Back</button>
 
-        {/* Header */}
         <div className="modal-header">
           <img src={podcast.image} alt={podcast.title} className="modal-cover" />
-          <div>
-            <h1>{podcast.title}</h1>
+          <div className="modal-header-info">
+            <div className="modal-title-fav">
+              <h1>{podcast.title}</h1>
+              <button
+                onClick={() => toggleFavorite(podcast.id)}
+                className={`fav-btn ${isFavorite ? 'favorited' : ''}`}
+                aria-label={isFavorite ? 'Remove from favorites' : 'Add to favorites'}
+              >
+                {isFavorite ? '♥' : '♡'}
+              </button>
+            </div>
             <p className="modal-desc">{podcast.description}</p>
 
             <div className="modal-meta">
@@ -47,20 +53,13 @@ export default function PodcastModal({ podcast, onClose }) {
                   )}
                 </div>
               </div>
-              <div>
-                <strong>Last Updated:</strong> {new Date(podcast.updated).toLocaleDateString()}
-              </div>
-              <div>
-                <strong>Seasons:</strong> {seasons.length}
-              </div>
-              <div>
-                <strong>Episodes:</strong> {totalEpisodes}
-              </div>
+              <div><strong>Last Updated:</strong> {new Date(podcast.updated).toLocaleDateString()}</div>
+              <div><strong>Seasons:</strong> {seasons.length}</div>
+              <div><strong>Episodes:</strong> {totalEpisodes}</div>
             </div>
           </div>
         </div>
 
-        {/* Seasons */}
         <div className="modal-seasons">
           <h2>Seasons</h2>
 
@@ -72,7 +71,7 @@ export default function PodcastModal({ podcast, onClose }) {
                 className="season-select"
               >
                 {seasons.map((s, i) => (
-                  <option key={i} value={i}>
+                  <option key={`season-${podcast.id}-${i}`} value={i}>
                     Season {i + 1}: {s.title}
                   </option>
                 ))}
@@ -89,14 +88,20 @@ export default function PodcastModal({ podcast, onClose }) {
 
               <div className="episode-list">
                 {episodes.length > 0 ? (
-                  episodes.map((ep, i) => (
-                    <EpisodeItem
-                      key={ep.id}
-                      episode={ep}
-                      show={podcast}
-                      seasonIndex={i}
-                    />
-                  ))
+                  episodes.map((ep, i) => {
+                    const uniqueKey = ep.id
+                      ? `episode-${ep.id}`
+                      : `episode-${podcast.id}-s${selectedSeason}-e${i}`
+
+                    return (
+                      <EpisodeItem
+                        key={uniqueKey}
+                        episode={ep}
+                        show={podcast}
+                        seasonIndex={i}
+                      />
+                    )
+                  })
                 ) : (
                   <p>No episodes in this season.</p>
                 )}

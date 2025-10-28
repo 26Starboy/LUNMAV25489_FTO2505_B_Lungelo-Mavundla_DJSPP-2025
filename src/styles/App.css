@@ -545,3 +545,50 @@ body {
   color: var(--primary);
   font-weight: 500;
 }
+
+
+/* ——— FAVORITE BUTTON ——— */
+.modal-title-fav {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.fav-btn {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  padding: 0.2rem;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fav-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.1);
+}
+
+.fav-btn.favorited {
+  color: #e91e63;
+  animation: heartBeat 0.4s ease;
+}
+
+@keyframes heartBeat {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3); }
+  100% { transform: scale(1); }
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  .fav-btn:hover {
+    background: rgba(255, 255, 255, 0.05);
+  }
+}
