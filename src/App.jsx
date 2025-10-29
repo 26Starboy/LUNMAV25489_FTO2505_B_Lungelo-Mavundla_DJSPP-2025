@@ -1,21 +1,24 @@
-// src/App.jsx
-import { Routes, Route } from "react-router-dom"
-import Header from "./components/Header"
-import Home from "./pages/Home"
-import ShowDetail from "./pages/ShowDetail"
-import Favourites from "./pages/Favourites"
-import GlobalPlayer from "./components/GlobalPlayer"  // ← ADD
+// src/App.jsx — main application routes and layout
+
+import { Routes, Route } from "react-router-dom" // Routing components
+import Header from "./components/Header" // Header shown on every page
+import Home from "./pages/Home" // Homepage listing podcasts
+import ShowDetail from "./pages/ShowDetail" // Podcast details page
+import Favourites from "./pages/Favourites" // User’s favourites page
+import GlobalPlayer from "./components/GlobalPlayer" // Persistent audio player
 
 export default function App() {
   return (
     <>
-      <Header />
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/show/:id" element={<ShowDetail />} />
-        <Route path="/favourites" element={<Favourites />} />
+      <Header /> {/* Top navigation/header */}
+
+      <Routes> {/* App routes */}
+        <Route path="/" element={<Home />} /> {/* Home page */}
+        <Route path="/show/:id" element={<ShowDetail />} /> {/* Show details page */}
+        <Route path="/favourites" element={<Favourites />} /> {/* Favourites page */}
       </Routes>
-      <GlobalPlayer />  {/* ← GLOBAL PLAYER */}
+
+      <GlobalPlayer /> {/* Always-visible global player */}
     </>
   )
 }

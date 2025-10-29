@@ -1,20 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Podcast Explorer</title>
+<!DOCTYPE html> <!-- /** @doctype Defines HTML5 document type */ -->
+<html lang="en"> <!-- /** @lang Sets the language to English */ -->
+  <head> <!-- /** @head Contains meta, title, and link information */ -->
+    <meta charset="UTF-8" /> <!-- /** @meta Defines document character encoding as UTF-8 */ -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" /> <!-- /** @favicon Displays small icon on browser tab */ -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /> <!-- /** @viewport Enables responsive layout on mobile devices */ -->
+    <title>Podcast Explorer</title> <!-- /** @title The title shown on the browser tab */ -->
 
-    <!-- P3.9 Social metatags -->
-    <meta property="og:title" content="Podcast Explorer" />
-    <meta property="og:description" content="Discover, play and save your favourite podcasts." />
-    <meta property="og:image" content="https://podcast-api.netlify.app/og-image.jpg" />
-    <meta property="og:url" content="https://your-domain.vercel.app" />
-    <meta name="twitter:card" content="summary_large_image" />
+    <!-- P3.9 Social metatags --> <!-- /** @section Social sharing metadata for rich previews */ -->
+    <meta property="og:title" content="Podcast Explorer" /> <!-- /** @og:title Defines Open Graph title for link previews */ -->
+    <meta property="og:description" content="Discover, play and save your favourite podcasts." /> <!-- /** @og:description Short summary shown on shared links */ -->
+    <meta property="og:image" content="https://podcast-api.netlify.app/og-image.jpg" /> <!-- /** @og:image URL for preview image on social platforms */ -->
+    <meta property="og:url" content="https://your-domain.vercel.app" /> <!-- /** @og:url Canonical link to your deployed app */ -->
+    <meta name="twitter:card" content="summary_large_image" /> <!-- /** @twitter:card Sets card type for Twitter link previews */ -->
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
+
+  <body> <!-- /** @body Main visible content and React mount point */ -->
+    <div id="root"></div> <!-- /** @div Root container where React app mounts */ -->
+    <script type="module" src="/src/main.jsx"></script> <!-- /** @script Loads main React entry point (Vite module) */ -->
   </body>
 </html>

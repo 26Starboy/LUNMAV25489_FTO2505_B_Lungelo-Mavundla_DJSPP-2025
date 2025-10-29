@@ -1,12 +1,18 @@
-// Please note that this file contains only the genre data. All other podcast information required for this challenge can be accessed via the API at: https://podcast-api.netlify.app/
+// Please note that this file contains only the genre data. 
+// All other podcast information required for this challenge 
+// can be accessed via the API at: https://podcast-api.netlify.app/
+
+// @file genres.js
+// @description Exports a static array of podcast genres, each containing metadata
+// such as id, title, description, and associated show IDs.
 
 export const genres = [
   {
-    id: 1,
-    title: "Personal Growth",
+    id: 1, // Unique numeric identifier for this genre
+    title: "Personal Growth", // Display title
     description:
       "Looking to improve yourself and reach your full potential? Look no further than our collection of personal growth podcasts! Our curated selection features a wide range of experts and thought leaders sharing their insights and strategies on everything from goal setting and productivity to mindfulness and self-care. Whether you're looking to advance your career, improve your relationships, or simply live a happier and more fulfilling life, our podcasts offer practical, actionable advice to help you achieve your goals.",
-    shows: ["10716", "10276", "6756", "10660"],
+    shows: ["10716", "10276", "6756", "10660"], // Related show IDs from API
   },
   {
     id: 2,
